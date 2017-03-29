@@ -30,4 +30,3 @@ if [ $errors_count -gt 0 ]; then
 else
     checkforfilereadable_ecode=0
 fi
-
