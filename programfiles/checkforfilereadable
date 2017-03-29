@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Utility version
+checkforfilereadable_v=1
+
+# Errors declaration
+declare -a checkforfilereadable_errors
+
+# Check if the first argument was given
+if [ ${#1} -eq 0 ]; then
+    checkforfilereadable_errors+=('The first argument is empty. Must be the wp-config.php file.')
+else
+    # Check if the first argument is a file
+    if ! [ -f $1 ]; then
+        checkforfilereadable_errors+=('The first argument is not a file. Must be the wp-config.php file.')
+    else
+        # Check if the file provided is readable
+        if ! [ -r $1 ]; then
+            checkforfilereadable_errors+=('The first file is a file that is not readable.')
+        fi
+    fi
+fi
+
+errors_count=${#checkforfilereadable_errors[@]}
+if [ $errors_count -gt 0 ]; then
+    for i in `seq 0 $(expr $errors_count - 1)`; do
+        echo ${checkforfilereadable_errors[$i]}
+    done
+    checkforfilereadable_ecode=1
+else
+    checkforfilereadable_ecode=0
+fi
+
+echo Error code: $checkforfilereadable_ecode
