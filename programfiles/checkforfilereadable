@@ -31,4 +31,3 @@ else
     checkforfilereadable_ecode=0
 fi
 
-echo Error code: $checkforfilereadable_ecode
